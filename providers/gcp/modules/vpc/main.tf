@@ -48,3 +48,28 @@ resource "google_compute_firewall" "allow_ssh" {
 
   source_ranges = var.firewall_source_range
 }
+
+# https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_global_address
+# Private IP Address for Cloud SQL
+resource "google_compute_global_address" "private_sql_ip_address" {
+  name          = "${var.organization}-${var.application_code}-${var.region}-${var.environment}-private-ip-address"
+  purpose       = "VPC_PEERING"
+  address_type  = "INTERNAL"
+  prefix_length = 16
+  network       = google_compute_network.main_vpc.id
+
+  depends_on = [
+    var.service_networking_api
+  ]
+}
+
+# https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/service_networking_connection
+resource "google_service_networking_connection" "private_vpc_sql_connection" {
+  network                 = google_compute_network.main_vpc.id
+  service                 = "servicenetworking.googleapis.com"
+  reserved_peering_ranges = [google_compute_global_address.private_sql_ip_address.name]
+
+  depends_on = [
+    var.service_networking_api
+  ]
+}

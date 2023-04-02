@@ -8,3 +8,13 @@ resource "google_project_service" "container" {
   service                    = "container.googleapis.com"
   disable_dependent_services = true
 }
+
+resource "google_project_service" "admin_api" {
+  service                    = "sqladmin.googleapis.com"
+  disable_dependent_services = true
+}
+
+resource "google_project_service" "networking_api" {
+  service                    = "servicenetworking.googleapis.com"
+  disable_dependent_services = true
+}

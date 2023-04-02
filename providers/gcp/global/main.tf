@@ -42,27 +42,29 @@ module "vpc" {
   region           = var.region
 
   # From module putput
-  service_compute   = module.api-and-service.service_compute
-  service_container = module.api-and-service.service_container
+  service_compute        = module.api-and-service.service_compute
+  service_container      = module.api-and-service.service_container
+  service_admin_api      = module.api-and-service.service_admin_api
+  service_networking_api = module.api-and-service.service_networking_api
 }
 
 module "k8s" {
   source = "../modules/k8s"
 
-  cluster_name = var.cluster_name
-  pod_secondary_ip = var.pod_secondary_ip
+  cluster_name          = var.cluster_name
+  pod_secondary_ip      = var.pod_secondary_ip
   services_secondary_ip = var.services_secondary_ip
 
   # From module putput
-  network = module.vpc.network
+  network    = module.vpc.network
   subnetwork = module.vpc.subnetwork
 
   # General variable
-  project_id = var.project_id
+  project_id       = var.project_id
   application_code = var.application_code
-  environment = var.environment
-  organization = var.organization
-  region = var.region
+  environment      = var.environment
+  organization     = var.organization
+  region           = var.region
 }
 
 module "network-service" {

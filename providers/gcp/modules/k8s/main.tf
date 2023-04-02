@@ -73,7 +73,7 @@ resource "google_container_node_pool" "general" {
     labels = {
       role = "general"
     }
-    
+
     taint {
       key    = "instance_type"
       value  = "spot"
