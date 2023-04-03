@@ -85,3 +85,11 @@ variable "service_compute" {
 variable "service_container" {
   description = "enable service container"
 }
+
+variable "service_admin_api" {
+  description = "enable service admin api"
+}
+
+variable "service_networking_api" {
+  description = "enable service networking api"
+}
