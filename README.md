@@ -1,3 +1,16 @@
+## Service Account Permission Needed
+```
+Cloud SQL Admin
+Compute Admin
+Compute Network Admin
+Compute Storage Admin
+Kubernetes Engine Admin
+Project IAM Admin
+Quota Administrator
+Service Account Key Admin
+Storage Admin
+```
+
 ## Enable the Resource First
 ```bash
 gcloud services enable \
