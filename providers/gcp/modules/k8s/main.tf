@@ -51,10 +51,10 @@ resource "google_container_cluster" "primary" {
 
 # https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_node_pool
 resource "google_container_node_pool" "general" {
-  name     = "${var.organization}-${var.application_code}-${var.environment}-general-node-pool"
-  cluster  = google_container_cluster.primary.name
-  project  = var.project_id
-  location = "${var.region}-a"
+  name       = "${var.organization}-${var.application_code}-${var.environment}-general-node-pool"
+  cluster    = google_container_cluster.primary.name
+  project    = var.project_id
+  location   = "${var.region}-a"
 
   management {
     auto_repair  = true
@@ -62,22 +62,16 @@ resource "google_container_node_pool" "general" {
   }
 
   autoscaling {
-    min_node_count = 0
-    max_node_count = 5
+    min_node_count = 1
+    max_node_count = var.max_node_count
   }
 
   node_config {
-    preemptible  = true
-    machine_type = "e2-highcpu-8"
+    preemptible  = false
+    machine_type = var.machine_type
 
     labels = {
       role = "general"
-    }
-
-    taint {
-      key    = "instance_type"
-      value  = "spot"
-      effect = "NO_SCHEDULE"
     }
 
     service_account = google_service_account.kubernetes.email

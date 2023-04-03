@@ -49,6 +49,16 @@ resource "google_compute_firewall" "allow_ssh" {
   source_ranges = var.firewall_source_range
 }
 
+# https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_route
+resource "google_compute_route" "internet_gateway_route" {
+  name             = "${var.organization}-${var.application_code}-${var.region}-${var.environment}-internet-gateway"
+  description      = "Default route to the Internet."
+  dest_range       = "0.0.0.0/0"
+  network          = google_compute_network.main_vpc.name
+  next_hop_gateway = "default-internet-gateway"
+  priority         = 1000
+}
+
 # https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_global_address
 # Private IP Address for Cloud SQL
 resource "google_compute_global_address" "private_sql_ip_address" {

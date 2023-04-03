@@ -1,15 +1,9 @@
-variable "nat_name" {
-  description = "Name of your NAT"
-}
-variable "network" {
-  description = "network self link"
-}
-variable "subnetwork" {
-  description = "subnetwork self link"
+variable "sql_private_vpc_connection" {
+  description = "SQL private VPC Connection"
 }
 
-variable "router_name" {
-  description = "router name"
+variable "network" {
+  description = "network self link"
 }
 
 # Main
@@ -38,4 +32,10 @@ variable "organization" {
 variable "application_code" {
   type        = string
   description = "Application of Code"
+}
+
+# User and Password
+variable "password_db" {
+  type        = string
+  description = "Password Default Database"
 }

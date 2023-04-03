@@ -97,3 +97,23 @@ variable "nat_name" {
 variable "cluster_name" {
   description = "Name of Cluster Kubernetes"
 }
+
+# SQL
+variable "password_db" {
+  type        = string
+  description = "Password Default Database"
+}
+variable "sa_proxy_cloud_sql" {
+  type        = string
+  description = "User Account for cloud proxy sql"
+}
+
+variable "machine_type" {
+  type        = string
+  description = "Machine Type of k8s cluster"
+}
+
+variable "max_node_count" {
+  type        = number
+  description = "Number of Max Node"
+}

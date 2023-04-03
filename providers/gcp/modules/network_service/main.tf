@@ -11,7 +11,7 @@ resource "google_compute_router_nat" "nat" {
 
   depends_on = [
     var.subnetwork,
-    google_compute_router.router
+    var.service_network
   ]
 }
 
@@ -23,4 +23,8 @@ resource "google_compute_router" "router" {
   region  = var.region
   project = var.project_id
   network = var.network.self_link
+
+  depends_on = [
+    var.service_network
+  ]
 }

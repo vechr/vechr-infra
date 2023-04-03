@@ -1,39 +1,15 @@
-variable "cluster_name" {
-  description = "Name of Cluster Kubernetes"
+variable "nat_name" {
+  description = "Name of your NAT"
 }
-
 variable "network" {
   description = "network self link"
 }
-
 variable "subnetwork" {
   description = "subnetwork self link"
 }
 
-variable "pod_secondary_ip" {
-  description = "Secondary ip range for Pod"
-  type = object({
-    range_name : string
-    ip_cidr_range : string
-  })
-}
-
-variable "services_secondary_ip" {
-  description = "Secondary ip range for Service"
-  type = object({
-    range_name : string
-    ip_cidr_range : string
-  })
-}
-
-variable "machine_type" {
-  type        = string
-  description = "Machine Type of k8s cluster"
-}
-
-variable "max_node_count" {
-  type        = number
-  description = "Number of Max Node"
+variable "router_name" {
+  description = "router name"
 }
 
 # Main
@@ -62,4 +38,8 @@ variable "organization" {
 variable "application_code" {
   type        = string
   description = "Application of Code"
+}
+
+variable "service_network" {
+  description = "Enable the Service Network"
 }

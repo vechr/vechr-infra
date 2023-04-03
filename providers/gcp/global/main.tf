@@ -17,8 +17,8 @@ terraform {
   }
 }
 
-module "api-and-service" {
-  source = "../modules/api-&-service"
+module "api_and_service" {
+  source = "../modules/api_and_service"
 }
 
 
@@ -42,10 +42,10 @@ module "vpc" {
   region           = var.region
 
   # From module putput
-  service_compute        = module.api-and-service.service_compute
-  service_container      = module.api-and-service.service_container
-  service_admin_api      = module.api-and-service.service_admin_api
-  service_networking_api = module.api-and-service.service_networking_api
+  service_compute        = module.api_and_service.service_compute
+  service_container      = module.api_and_service.service_container
+  service_admin_api      = module.api_and_service.service_admin_api
+  service_networking_api = module.api_and_service.service_networking_api
 }
 
 module "k8s" {
@@ -54,6 +54,8 @@ module "k8s" {
   cluster_name          = var.cluster_name
   pod_secondary_ip      = var.pod_secondary_ip
   services_secondary_ip = var.services_secondary_ip
+  machine_type          = var.machine_type
+  max_node_count        = var.max_node_count
 
   # From module putput
   network    = module.vpc.network
@@ -67,14 +69,44 @@ module "k8s" {
   region           = var.region
 }
 
-module "network-service" {
-  source   = "../modules/network-service"
+module "network_service" {
+  source   = "../modules/network_service"
   nat_name = var.nat_name
 
   # From module putput
-  subnetwork  = module.vpc.subnetwork
-  network     = module.vpc.network
-  router_name = var.router_name
+  subnetwork      = module.vpc.subnetwork
+  network         = module.vpc.network
+  router_name     = var.router_name
+  service_network = module.api_and_service.service_network
+
+  # General variable
+  project_id       = var.project_id
+  application_code = var.application_code
+  environment      = var.environment
+  organization     = var.organization
+  region           = var.region
+}
+
+module "cloudsql" {
+  source      = "../modules/cloudsql"
+  password_db = var.password_db
+
+
+  # From module putput
+  sql_private_vpc_connection = module.vpc.sql_private_vpc_connection
+  network                    = module.vpc.network
+
+  # General variable
+  project_id       = var.project_id
+  application_code = var.application_code
+  environment      = var.environment
+  organization     = var.organization
+  region           = var.region
+}
+
+module "iam" {
+  source             = "../modules/iam"
+  sa_proxy_cloud_sql = var.sa_proxy_cloud_sql
 
   # General variable
   project_id       = var.project_id

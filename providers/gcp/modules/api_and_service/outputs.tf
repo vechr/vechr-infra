@@ -13,3 +13,7 @@ output "service_admin_api" {
 output "service_networking_api" {
   value = google_project_service.networking_api
 }
+
+output "service_network" {
+  value = google_project_service.service_network
+}
