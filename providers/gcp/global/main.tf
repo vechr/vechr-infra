@@ -42,10 +42,9 @@ module "vpc" {
   region           = var.region
 
   # From module putput
-  service_compute        = module.api_and_service.service_compute
-  service_container      = module.api_and_service.service_container
-  service_admin_api      = module.api_and_service.service_admin_api
-  service_networking_api = module.api_and_service.service_networking_api
+  service_compute   = module.api_and_service.service_compute
+  service_container = module.api_and_service.service_container
+  service_admin_api = module.api_and_service.service_admin_api
 }
 
 module "k8s" {
@@ -88,25 +87,15 @@ module "network_service" {
 }
 
 module "cloudsql" {
-  source      = "../modules/cloudsql"
-  password_db = var.password_db
+  source             = "../modules/cloudsql"
+  password_db        = var.password_db
+  sa_proxy_cloud_sql = var.sa_proxy_cloud_sql
+  count              = var.cloud_sql_enabled ? 1 : 0
 
 
   # From module putput
-  sql_private_vpc_connection = module.vpc.sql_private_vpc_connection
-  network                    = module.vpc.network
-
-  # General variable
-  project_id       = var.project_id
-  application_code = var.application_code
-  environment      = var.environment
-  organization     = var.organization
-  region           = var.region
-}
-
-module "iam" {
-  source             = "../modules/iam"
-  sa_proxy_cloud_sql = var.sa_proxy_cloud_sql
+  network                = module.vpc.network
+  service_networking_api = module.api_and_service.service_networking_api
 
   # General variable
   project_id       = var.project_id

@@ -89,7 +89,3 @@ variable "service_container" {
 variable "service_admin_api" {
   description = "enable service admin api"
 }
-
-variable "service_networking_api" {
-  description = "enable service networking api"
-}

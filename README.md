@@ -1,14 +1,22 @@
 ## Service Account Permission Needed
+### For Admin Service Account
 ```
-Cloud SQL Admin
+Storage Object Admin
+```
+
+### For service Account
+Notes: `Service Account` User is to access default service account compute kubernetes
+```
 Compute Admin
 Compute Network Admin
 Compute Storage Admin
 Kubernetes Engine Admin
-Project IAM Admin
 Quota Administrator
+Service Account Admin
+Service Account User // to access default service account compute
 Service Account Key Admin
-Storage Admin
+Storage Object Admin
+Cloud SQL Admin
 ```
 
 ## Enable the Resource First
@@ -30,10 +38,7 @@ terraform fmt -recursive
 
 ## Init Terraform
 ```bash
-terraform init \
-    -backend-config="bucket=vechr-iiot-tf-state" \
-    -backend-config="prefix=terraform/state" \
-    -backend-config="credentials=/Users/zulfikar4568/Downloads/vechr-iiot-dev-key.json"
+terraform init -backend-config=backend.tfbackend
 ```
 
 ## Apply the Configuration

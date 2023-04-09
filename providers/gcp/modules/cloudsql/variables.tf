@@ -1,9 +1,13 @@
-variable "sql_private_vpc_connection" {
-  description = "SQL private VPC Connection"
-}
-
 variable "network" {
   description = "network self link"
+}
+
+variable "service_networking_api" {
+  description = "enable service networking api"
+}
+variable "sa_proxy_cloud_sql" {
+  type        = string
+  description = "User Account for cloud sql"
 }
 
 # Main

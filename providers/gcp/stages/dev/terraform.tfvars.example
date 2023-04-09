@@ -1,11 +1,12 @@
-# Configure your Project 
-project_id       = "vechr-iiot-dev"
-region           = "asia-southeast2"
-environment      = "dev"
-organization     = "vechr"
-application_code = "iiot"
+#################################################### Configure your Project ####################################################
+project_id         = "vechr-iiot-dev"
+region             = "asia-southeast2"
+google_credentials = "vechr-iiot-dev-key.json"
+environment        = "dev"
+organization       = "vechr"
+application_code   = "iiot"
 
-# Create your Network
+#################################################### Create your Network ####################################################
 # -- VPC
 network_name = "vpc-1"
 routing_mode = "REGIONAL"
@@ -33,14 +34,12 @@ firewall_ssh = {
   ports    = ["22"]
 }
 
-# Create your Kubernetes
-cluster_name = "iiot-cluster"
-machine_type = "e2-highcpu-8"
-max_node_count = 5
+#################################################### Create your Kubernetes ####################################################
+cluster_name   = "iiot-cluster"
+machine_type   = "e2-highcpu-8"
+max_node_count = 20
 
-google_credentials = "/Users/zulfikar4568/Downloads/vechr-iiot-dev-key.json"
-
-# Database
-user_db = "vechr"
-password_db = "hai123"
+#################################################### Database SQL ####################################################
+cloud_sql_enabled  = false
+password_db        = "iiot123"
 sa_proxy_cloud_sql = "cloud-sql-proxy"

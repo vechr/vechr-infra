@@ -51,10 +51,10 @@ resource "google_container_cluster" "primary" {
 
 # https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_node_pool
 resource "google_container_node_pool" "general" {
-  name       = "${var.organization}-${var.application_code}-${var.environment}-general-node-pool"
-  cluster    = google_container_cluster.primary.name
-  project    = var.project_id
-  location   = "${var.region}-a"
+  name     = "${var.organization}-${var.application_code}-${var.environment}-general-node-pool"
+  cluster  = google_container_cluster.primary.name
+  project  = var.project_id
+  location = "${var.region}-a"
 
   management {
     auto_repair  = true

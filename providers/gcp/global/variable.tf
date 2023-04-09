@@ -1,3 +1,4 @@
+#################################################### Main Config ####################################################
 variable "google_credentials" {
   type        = string
   description = "Environment Variable Google Credentials"
@@ -30,7 +31,7 @@ variable "application_code" {
   description = "Application of Code"
 }
 
-## VPC
+#################################################### VPC ####################################################
 
 variable "network_name" {
   description = "Name for your network"
@@ -50,6 +51,7 @@ variable "subnet_private" {
   })
 }
 
+#################################################### VPC for k8s ####################################################
 variable "pod_secondary_ip" {
   description = "Secondary ip range for Pod"
   type = object({
@@ -88,24 +90,14 @@ variable "firewall_source_range" {
   type        = list(any)
 }
 
-# Network Service
+#################################################### Network Service ####################################################
 variable "nat_name" {
   description = "Name of your NAT"
 }
 
-# k8s
+#################################################### k8s ####################################################
 variable "cluster_name" {
   description = "Name of Cluster Kubernetes"
-}
-
-# SQL
-variable "password_db" {
-  type        = string
-  description = "Password Default Database"
-}
-variable "sa_proxy_cloud_sql" {
-  type        = string
-  description = "User Account for cloud proxy sql"
 }
 
 variable "machine_type" {
@@ -116,4 +108,17 @@ variable "machine_type" {
 variable "max_node_count" {
   type        = number
   description = "Number of Max Node"
+}
+
+#################################################### SQL ####################################################
+variable "cloud_sql_enabled" {
+  description = "enablement of cloud sql"
+}
+variable "password_db" {
+  type        = string
+  description = "Password Default Database"
+}
+variable "sa_proxy_cloud_sql" {
+  type        = string
+  description = "User Account for cloud proxy sql"
 }
