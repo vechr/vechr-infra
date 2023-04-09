@@ -63,12 +63,14 @@ resource "google_container_node_pool" "general" {
 
   autoscaling {
     min_node_count = 1
-    max_node_count = var.max_node_count
+    max_node_count = var.node_pool.max_node_count
   }
 
   node_config {
-    preemptible  = false
-    machine_type = var.machine_type
+    preemptible  = var.node_pool.preemptible
+    machine_type = var.node_pool.machine_type
+    disk_size_gb = var.node_pool.disk_size_gb
+    disk_type = var.node_pool.disk_type
 
     labels = {
       role = "general"

@@ -53,8 +53,7 @@ module "k8s" {
   cluster_name          = var.cluster_name
   pod_secondary_ip      = var.pod_secondary_ip
   services_secondary_ip = var.services_secondary_ip
-  machine_type          = var.machine_type
-  max_node_count        = var.max_node_count
+  node_pool = var.node_pool
 
   # From module putput
   network    = module.vpc.network

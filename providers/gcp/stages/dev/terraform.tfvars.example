@@ -36,8 +36,13 @@ firewall_ssh = {
 
 #################################################### Create your Kubernetes ####################################################
 cluster_name   = "iiot-cluster"
-machine_type   = "e2-highcpu-8"
-max_node_count = 20
+node_pool = {
+  disk_size_gb = 20
+  disk_type = "pd-standard"
+  machine_type = "e2-highcpu-8"
+  preemptible = false
+  max_node_count = 20
+}
 
 #################################################### Database SQL ####################################################
 cloud_sql_enabled  = false

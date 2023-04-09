@@ -100,14 +100,22 @@ variable "cluster_name" {
   description = "Name of Cluster Kubernetes"
 }
 
-variable "machine_type" {
-  type        = string
-  description = "Machine Type of k8s cluster"
-}
+variable "node_pool" {
+  type = object({
+    machine_type: string
+    preemptible: bool
+    disk_size_gb: number
+    disk_type: string
+    max_node_count: number
+  })
 
-variable "max_node_count" {
-  type        = number
-  description = "Number of Max Node"
+  default = {
+    disk_size_gb = 20
+    disk_type = "pd-standard"
+    machine_type = "e2-highcpu-8"
+    preemptible = false
+    max_node_count = 20
+  }
 }
 
 #################################################### SQL ####################################################
