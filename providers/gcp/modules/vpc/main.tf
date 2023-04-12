@@ -58,3 +58,16 @@ resource "google_compute_route" "internet_gateway_route" {
   next_hop_gateway = "default-internet-gateway"
   priority         = 1000
 }
+# https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_global_address
+resource "google_compute_address" "nats_ip" {
+  name = "${var.organization}-${var.application_code}-${var.region}-${var.environment}-nats-ip"
+  project = var.project_id
+  address_type = "EXTERNAL"
+  region = var.region
+}
+
+resource "google_compute_global_address" "ingress_ip" {
+  name = "${var.organization}-${var.application_code}-${var.region}-${var.environment}-ingress-ip"
+  project = var.project_id
+  address_type = "EXTERNAL"
+}
