@@ -37,22 +37,3 @@ Combination of Terrafrom and Terragrunt
 ./execute.sh plan production
 ./execute.sh apply production
 ```
-
-## `LEGACY WITHOUT TERRAGRUNT`
-The legacy method inside folder providers, this is only work used terraform
-### a. Formatting Terraform
-```bash
-terraform fmt -recursive
-```
-
-### b. Init Terraform
-```bash
-cd providers/gcp/global
-terraform init -backend-config=backend.tfbackend
-```
-
-### c. Apply the Configuration
-```bash
-cd providers/gcp/global
-terraform apply -var-file=../stages/dev/terraform.tfvars
-```
