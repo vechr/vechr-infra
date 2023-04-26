@@ -1,3 +1,0 @@
-credentials = "/Users/zulfikar4568/Downloads/vechr-iiot-prod-key.json"
-bucket = "vechr-iiot-tf-state-prod"
-prefix = "terraform/state"
