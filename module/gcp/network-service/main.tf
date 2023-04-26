@@ -35,5 +35,5 @@ resource "google_compute_router" "default" {
   name    = "${var.organization}-${var.application_code}-${var.environment}-${var.router_name}"
   region  = var.region
   project = var.project_id
-  network = var.network.self_link
+  network = var.network
 }

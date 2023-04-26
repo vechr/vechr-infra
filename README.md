@@ -1,10 +1,10 @@
-## Service Account Permission Needed
-### For Admin Service Account
+## `Service Account Permission Needed`
+### a. For Admin Service Account
 ```
 Storage Object Admin
 ```
 
-### For service Account
+### b. For service Account
 Notes: `Service Account` User is to access default service account compute kubernetes
 ```
 Compute Admin
@@ -19,7 +19,7 @@ Storage Object Admin
 Cloud SQL Admin
 ```
 
-## Enable the Resource First
+## c. Enable the Resource First
 ```bash
 gcloud services enable \
     cloudresourcemanager.googleapis.com \
@@ -30,18 +30,28 @@ gcloud services enable \
     sqladmin.googleapis.com \
     networkservices.googleapis.com
 ```
+## `WITH TERRAGRUNT`
+Combination of Terrafrom and Terragrunt
+### a. Plan and Apply
+```bash
+./execute.sh plan production
+./execute.sh apply production
+```
 
-## Formatting Terraform
+## `LEGACY WITHOUT TERRAGRUNT`
+The legacy method inside folder providers, this is only work used terraform
+### a. Formatting Terraform
 ```bash
 terraform fmt -recursive
 ```
 
-## Init Terraform
+### b. Init Terraform
 ```bash
+cd providers/gcp/global
 terraform init -backend-config=backend.tfbackend
 ```
 
-## Apply the Configuration
+### c. Apply the Configuration
 ```bash
 cd providers/gcp/global
 terraform apply -var-file=../stages/dev/terraform.tfvars

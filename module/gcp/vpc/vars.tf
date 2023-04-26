@@ -51,10 +51,14 @@ variable "subnet" {
     name: string
     ip_cidr_range: string
     private_ip_google_access: bool
-    secondary_ip_ranges: list(object({
+    pod_secondary_ip: object({
       range_name: string
       ip_cidr_range: string
-    }))
+    })
+    services_secondary_ip: object({
+      range_name: string
+      ip_cidr_range: string
+    })
   })
 }
 

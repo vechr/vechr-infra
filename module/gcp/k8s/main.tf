@@ -28,8 +28,8 @@ resource "google_container_cluster" "default" {
   location                 = "${var.region}-a"
   remove_default_node_pool = var.cluster.remove_default_node_pool
   initial_node_count       = var.cluster.initial_node_count
-  network                  = var.network.self_link
-  subnetwork               = var.subnetwork.self_link
+  network                  = var.network
+  subnetwork               = var.subnetwork
   networking_mode          = "VPC_NATIVE"
 
   # Optional, if you want multi-zonal cluster

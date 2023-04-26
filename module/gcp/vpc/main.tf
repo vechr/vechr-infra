@@ -36,11 +36,14 @@ resource "google_compute_subnetwork" "default" {
   region                   = var.region
   network                  = google_compute_network.default.id
   private_ip_google_access = var.subnet.private_ip_google_access
-
-  count                    = length(var.subnet.secondary_ip_ranges)
   secondary_ip_range {
-    range_name    = var.subnet.secondary_ip_ranges[count.index].range_name
-    ip_cidr_range = var.subnet.secondary_ip_ranges[count.index].ip_cidr_range
+    range_name    = var.subnet.pod_secondary_ip.range_name
+    ip_cidr_range = var.subnet.pod_secondary_ip.ip_cidr_range
+  }
+
+  secondary_ip_range {
+    range_name    = var.subnet.services_secondary_ip.range_name
+    ip_cidr_range = var.subnet.services_secondary_ip.ip_cidr_range
   }
 }
 

@@ -13,10 +13,12 @@ inputs = {
     name: "private",
     ip_cidr_range: "10.5.0.0/20",
     private_ip_google_access: true,
-    secondary_ip_ranges: [
-      { range_name : "pod-ip-range", ip_cidr_range : "10.0.0.0/14" },
-      { range_name : "service-ip-range", ip_cidr_range : "10.4.0.0/19" }
-    ]
+    pod_secondary_ip: {
+      range_name : "pod-ip-range", ip_cidr_range : "10.0.0.0/14"
+    },
+    services_secondary_ip: {
+      range_name : "service-ip-range", ip_cidr_range : "10.4.0.0/19"
+    }
   }
 
   firewall = {
