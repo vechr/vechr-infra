@@ -17,6 +17,7 @@ Service Account User // to access default service account compute
 Service Account Key Admin
 Storage Object Admin
 Cloud SQL Admin
+Storage Admin
 ```
 
 ## c. Enable the Resource First
@@ -30,6 +31,11 @@ gcloud services enable \
     sqladmin.googleapis.com \
     networkservices.googleapis.com
 ```
+Check ID Projects
+```bash
+gcloud projects list
+```
+Config or Setting terragrunt file for example `resources/production/terragrunt.hcl`
 ## `WITH TERRAGRUNT`
 Combination of Terrafrom and Terragrunt
 ### a. Plan and Apply
